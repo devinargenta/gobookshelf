@@ -6,47 +6,42 @@ import (
 	"log"
 	"os"
 
+	"github.com/devinargenta/devinargenta/api"
 	"github.com/joho/godotenv"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
+	if err := godotenv.Load(); err != nil {
 		log.Fatal("Error loading .env file")
 	}
-	api := &API{
+
+	api := &api.API{
 		URL:   os.Getenv("API_ROOT"),
 		Token: os.Getenv("TOKEN"),
 	}
 
-	libs, err := api.getLibraries()
+	libs, err := api.GetLibraries()
 	if err != nil {
 		log.Fatal(err)
 	}
+	// get the first item
+	if len(libs) == 0 {
+		log.Println("No libraries found")
+		return
+	}
 
-	results := make(chan []Items, len(libs))
-	// get the frst item
-
-	l, err := api.getPersonalized(libs[0].ID)
+	l, err := api.GetPersonalized(libs[0].ID)
 	if err != nil {
-		log.Println(err)
+		log.Printf("Error getting personalized data for library ID %s: %v", libs[0].ID, err)
+		return
 	}
-	results <- l.Entities
 
-	go func() {
-		close(results)
-	}()
-
-	for result := range results {
-		for _, item := range result {
-			printJSON(item)
-		}
-	}
+	printJSON(l.Items)
 }
 
 // prints json nicely for me
 func printJSON(s any) {
-	b, err := json.MarshalIndent(s, "", "  ")
+	b, err := json.MarshalIndent(s, ">", "  ")
 	if err != nil {
 		log.Fatal(err)
 	}
