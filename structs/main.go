@@ -4,16 +4,6 @@ import (
 	"encoding/json"
 )
 
-// type Libraries struct {
-// 	Libraries []Library `json:"libraries"`
-// }
-
-// type Library struct {
-// 	ID    string `json:"id"`
-// 	Name  string `json:"name"`
-// 	Items []Item `json:"items"`
-// }
-
 type Stats struct {
 	TotalTime json.Number     `json:"totalTime"`
 	Today     json.Number     `json:"today"`
@@ -26,12 +16,6 @@ type Item struct {
 	Metadata  Media  `json:"media"`
 }
 
-type Entities struct {
-	ID       string   `json:"id"`
-	Label    string   `json:"label"`
-	Entities []Entity `json:"entities"`
-	Type     string   `json:"type"`
-}
 type MediaMetadata struct {
 	AuthorName string `json:"authorname"`
 	Title      string `json:"title"`
@@ -42,11 +26,14 @@ type Media struct {
 }
 
 type Result struct {
-	Items []Entities `json:"items"`
+	Items []EntityGroup `json:"items"`
 }
-type Items struct {
-	ID    string `json:"id"`
-	Label string `json:"label"`
+
+type EntityGroup struct {
+	ID       string   `json:"id"`
+	Label    string   `json:"label"`
+	Entities []Entity `json:"entities"`
+	Type     string   `json:"type"`
 }
 
 type Entity struct {
@@ -55,10 +42,15 @@ type Entity struct {
 	Metadata  Media  `json:"media"`
 }
 
-type Library struct {
-	ID string `json:"id"`
+type ItemLabel struct {
+	ID    string `json:"id"`
+	Label string `json:"label"`
 }
 
-type Libraries struct {
+type LibraryCollection struct {
 	Libraries []Library `json:"libraries"`
+}
+
+type Library struct {
+	ID string `json:"id"`
 }

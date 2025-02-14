@@ -17,7 +17,7 @@ type API struct {
 }
 
 var Client = &http.Client{
-	Timeout: 30 * time.Second,
+	Timeout: 10 * time.Second,
 }
 
 func (api *API) Get(path string) ([]byte, error) {
@@ -43,7 +43,7 @@ func (api *API) Get(path string) ([]byte, error) {
 
 // getLibraries fetches the list of libraries from the API.
 func (api *API) GetLibraries() ([]s.Library, error) {
-	var libraries s.Libraries
+	var libraries s.LibraryCollection
 	body, err := api.Get("libraries")
 	if err != nil {
 		return nil, err

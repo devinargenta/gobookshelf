@@ -6,8 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	s "github.com/devinargenta/devinargenta/structs"
-	structs "github.com/devinargenta/devinargenta/structs"
+	"github.com/devinargenta/devinargenta/structs"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -60,7 +59,7 @@ func TestAPI_get(t *testing.T) {
 	}
 }
 func TestGetLibraries(t *testing.T) {
-	expectedLibraries := []s.Library{
+	expectedLibraries := []structs.Library{
 		{ID: "1"},
 		{ID: "2"},
 	}
@@ -69,7 +68,7 @@ func TestGetLibraries(t *testing.T) {
 		assert.Equal(t, "/libraries", r.URL.Path)
 		assert.Equal(t, "Bearer test-token", r.Header.Get("Authorization"))
 
-		libraries := s.Libraries{Libraries: expectedLibraries}
+		libraries := structs.LibraryCollection{Libraries: expectedLibraries}
 		json.NewEncoder(w).Encode(libraries)
 	}))
 	defer server.Close()
