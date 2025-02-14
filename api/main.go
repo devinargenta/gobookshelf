@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	s "github.com/devinargenta/devinargenta/structs"
+	s "github.com/devinargenta/gobookshelf/structs"
 )
 
 type API struct {

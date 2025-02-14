@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/devinargenta/devinargenta/structs"
+	"github.com/devinargenta/gobookshelf/structs"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -58,6 +58,7 @@ func TestAPI_get(t *testing.T) {
 		})
 	}
 }
+
 func TestGetLibraries(t *testing.T) {
 	expectedLibraries := []structs.Library{
 		{ID: "1"},

@@ -1,4 +1,4 @@
-module github.com/devinargenta/devinargenta
+module github.com/devinargenta/gobookshelf
 
 go 1.23.6
 

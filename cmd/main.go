@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/devinargenta/devinargenta/api"
+	"github.com/devinargenta/gobookshelf/api"
 	"github.com/joho/godotenv"
 )
 
@@ -31,7 +31,6 @@ func main() {
 
 	fID := libs[0].ID
 	l, err := a.GetPersonalized(fID)
-
 	if err != nil {
 		log.Printf("Error getting personalized data for library ID %s: %v", fID, err)
 		return
